@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+#Copyright 2016  BUAA (Author: JohnJiang).  Apache 2.0.
+
+#This script accepts a Chinese stream and inserts blanks between Chinese characters
+#Used to prepare character-based transcriptions and compute CER.
+#Python2/Python3
+
+from __future__ import print_function
+import sys
+
+if sys.version[0]==2: #python2
+    for l in sys.stdin:
+        l=l.strip()
+        ll=l.split()
+        lk=ll[0]
+        for v in ll[1:]:
+            v = v.decode('utf-8')	
+            for i in v:
+                lk= lk + ' ' + i
+        print (lk.encode('utf-8'))
+else:#python3
+    for l in sys.stdin:
+        l=l.strip()
+        ll=l.split()
+        lk=ll[0]
+        for v in ll[1:]:
+            for i in v:
+                lk= lk + ' ' + i
+        print (lk)
+
